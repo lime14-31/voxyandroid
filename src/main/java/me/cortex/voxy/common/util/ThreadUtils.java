@@ -27,6 +27,7 @@ public class ThreadUtils {
         // Android compatibility test.
 // Disable Linux CPU affinity initialization.
 schedSetaffinity = 0;
+Logger.info("=== VOXY ANDROID PATCH ACTIVE ===");
     }
 
     public static boolean SetThreadSelectedCpuSetMasksWin32(long mask) {
