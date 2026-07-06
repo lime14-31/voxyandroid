@@ -24,18 +24,9 @@ public class ThreadUtils {
             SetThreadSelectedCpuSetMasks = 0;
         }
 
-        if (Platform.get() == Platform.LINUX) {
-            long fn = 0;
-            try {
-                var libc = APIUtil.apiCreateLibrary("libc.so.6");
-                fn = APIUtil.apiGetFunctionAddress(libc, "sched_setaffinity");
-            } catch (Exception e) {
-                Logger.error(e);
-            }
-            schedSetaffinity = fn;
-        } else {
-            schedSetaffinity = 0;
-        }
+        // Android compatibility test.
+// Disable Linux CPU affinity initialization.
+schedSetaffinity = 0;
     }
 
     public static boolean SetThreadSelectedCpuSetMasksWin32(long mask) {
