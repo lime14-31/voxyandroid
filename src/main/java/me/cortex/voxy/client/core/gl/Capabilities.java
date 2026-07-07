@@ -217,3 +217,14 @@ public class Capabilities {
 
     //TODO: add gpu eviction tracking
 }
+
+Logger.info("===== VOXY CAPABILITIES =====");
+Logger.info("Vendor: " + glGetString(GL_VENDOR));
+Logger.info("Version: " + glGetString(GL_VERSION));
+Logger.info("Compute: " + this.compute);
+Logger.info("Indirect: " + this.indirectParameters);
+Logger.info("INT64: " + this.INT64_t);
+Logger.info("Subgroup: " + this.subgroup);
+Logger.info("SparseBuffer: " + this.sparseBuffer);
+Logger.info("Mesa: " + this.isMesa);
+Logger.info("============================");
