@@ -264,6 +264,9 @@ public class MDICSectionRenderer extends AbstractSectionRenderer<MDICViewport, B
 
 
         {//Dispatch prep
+
+Logger.info("Reached prep");
+
             this.prepShader.bind();
             glBindBufferBase(GL_UNIFORM_BUFFER, 0, this.uniform.id);
             glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, viewport.drawCountCallBuffer.id);
@@ -275,6 +278,8 @@ public class MDICSectionRenderer extends AbstractSectionRenderer<MDICViewport, B
 
         GPUTiming.INSTANCE.marker("OT");
         {//Test occlusion
+
+Logger.info("Reached culling");
             this.cullShader.bind();
             if (this.pipeline.hasTAA()) this.pipeline.bindUniforms();//Used for shader TAA
             if (Capabilities.INSTANCE.repFragTest) {
@@ -292,9 +297,11 @@ public class MDICSectionRenderer extends AbstractSectionRenderer<MDICViewport, B
             glColorMask(false, false, false, false);
             glDepthMask(false);
             glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT|GL_COMMAND_BARRIER_BIT);
-            glDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_BYTE, 6*4);
-            glDepthMask(true);
-            glColorMask(true, true, true, true);
+            Logger.info("About to call glMultiDrawElementsIndirectCountARB");
+
+glMultiDrawElementsIndirectCountARB(GL_TRIANGLES, GL_UNSIGNED_SHORT, indirectOffset, drawCountOffset, maxDrawCount, 0);
+
+Logger.info("Indirect draw returned");
             glDisable(GL_DEPTH_TEST);
             if (Capabilities.INSTANCE.repFragTest) {
                 glDisable(GL_REPRESENTATIVE_FRAGMENT_TEST_NV);
@@ -305,6 +312,8 @@ public class MDICSectionRenderer extends AbstractSectionRenderer<MDICViewport, B
 
         {//Generate the commands
             this.distanceCountBuffer.zeroRange(0, 1024*4);
+
+Logger.info("Reached command generation");
             this.commandGenShader.bind();
             glBindBufferBase(GL_UNIFORM_BUFFER, 0, this.uniform.id);
             glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, viewport.drawCallBuffer.id);
@@ -341,6 +350,8 @@ public class MDICSectionRenderer extends AbstractSectionRenderer<MDICViewport, B
 
         GPUTiming.INSTANCE.marker("TS");
         {//Do translucency sorting
+
+Logger.info("Reached translucency");
             this.prefixSumShader.bind();
             glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, this.distanceCountBuffer.id);
             glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);//Am unsure if is needed
