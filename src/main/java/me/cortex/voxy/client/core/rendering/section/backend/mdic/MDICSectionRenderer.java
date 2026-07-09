@@ -297,9 +297,9 @@ Logger.info("Reached culling");
             glColorMask(false, false, false, false);
             glDepthMask(false);
             glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT|GL_COMMAND_BARRIER_BIT);
-            Logger.info("About to call glMultiDrawElementsIndirectCountARB");
+            Logger.info("About to call glDrawElementsIndirect");
 
-glMultiDrawElementsIndirectCountARB(GL_TRIANGLES, GL_UNSIGNED_SHORT, indirectOffset, drawCountOffset, maxDrawCount, 0);
+glDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_BYTE, 6 * 4);
 
 Logger.info("Indirect draw returned");
             glDisable(GL_DEPTH_TEST);
