@@ -210,12 +210,17 @@ public class Shader extends TrackedObject {
                 MemoryUtil.nmemFree(ptr);
             }
             GL20C.glCompileShader(shader);
+
+int err = GL11C.glGetError();
+Logger.warn("GL ERROR AFTER COMPILE = " + err);
+
             String log = GL20C.glGetShaderInfoLog(shader);
 
-            if (!log.isEmpty()) {
-    Logger.warn("Shader compiler log:");
-    Logger.warn(log);
-}
+            Logger.warn("===== SHADER COMPILER LOG =====");
+Logger.warn(log);
+Logger.warn("===== SHADER SOURCE BEGIN =====");
+Logger.warn(src);
+Logger.warn("===== SHADER SOURCE END =====");
 
             int result = GL20C.glGetShaderi(shader, GL20C.GL_COMPILE_STATUS);
 
