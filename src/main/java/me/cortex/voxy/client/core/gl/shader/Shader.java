@@ -213,13 +213,16 @@ public class Shader extends TrackedObject {
             String log = GL20C.glGetShaderInfoLog(shader);
 
             if (!log.isEmpty()) {
-                Logger.warn(log);
-            }
+    Logger.warn("Shader compiler log:");
+    Logger.warn(log);
+}
 
             int result = GL20C.glGetShaderi(shader, GL20C.GL_COMPILE_STATUS);
 
             if (result != GL20C.GL_TRUE) {
-                GL20C.glDeleteShader(shader);
+    Logger.error("===== SHADER SOURCE BEGIN =====");
+Logger.error(src);
+Logger.error("===== SHADER SOURCE END ====="); GL20C.glDeleteShader(shader);
                 try {
                     Files.writeString(Path.of("SHADER_DUMP.txt"), src);
                 } catch (IOException e) {
