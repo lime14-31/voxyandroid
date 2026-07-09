@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 
 public class ShaderLoader {
     public static String parse(String id) {
-        var src =  "#version 460 core\n";
+        var src = "#version 320 es\n";
         src += String.join("\n", ShaderLoadingParser.parseRoot(Identifier.parse(id)));
         return src;
     }
