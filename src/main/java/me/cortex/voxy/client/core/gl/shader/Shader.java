@@ -216,6 +216,8 @@ Logger.warn("GL ERROR AFTER COMPILE = " + err);
 
             String log = GL20C.glGetShaderInfoLog(shader);
 
+Logger.warn("LOG LENGTH = " + log.length());
+
             Logger.warn("===== SHADER COMPILER LOG =====");
 Logger.warn(log);
 Logger.warn("===== SHADER SOURCE BEGIN =====");
