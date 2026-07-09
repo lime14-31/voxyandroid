@@ -200,8 +200,12 @@ public class Shader extends TrackedObject {
             }
         }
 
+Logger.error("=== CREATE SHADER CALLED ===");
+
         private static int createShader(ShaderType type, String src) {
             int shader = GL20C.glCreateShader(type.gl);
+
+Logger.error("Shader ID = " + shader);
             {//https://github.com/CaffeineMC/sodium/blob/fc42a7b19836c98a35df46e63303608de0587ab6/src/main/java/me/jellysquid/mods/sodium/client/gl/shader/ShaderWorkarounds.java
                 long ptr = MemoryUtil.memAddress(MemoryUtil.memUTF8(src, true));
                 try (var stack = MemoryStack.stackPush()) {
@@ -210,6 +214,8 @@ public class Shader extends TrackedObject {
                 MemoryUtil.nmemFree(ptr);
             }
             GL20C.glCompileShader(shader);
+
+Logger.error("Compile finished");
 
 int err = org.lwjgl.opengl.GL11C.glGetError();
 Logger.warn("GL ERROR AFTER COMPILE = " + err);
