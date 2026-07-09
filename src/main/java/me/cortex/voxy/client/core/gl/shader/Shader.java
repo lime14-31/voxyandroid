@@ -211,7 +211,7 @@ public class Shader extends TrackedObject {
             }
             GL20C.glCompileShader(shader);
 
-int err = GL11C.glGetError();
+int err = org.lwjgl.opengl.GL11C.glGetError();
 Logger.warn("GL ERROR AFTER COMPILE = " + err);
 
             String log = GL20C.glGetShaderInfoLog(shader);
