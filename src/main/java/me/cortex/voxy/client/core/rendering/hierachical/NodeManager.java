@@ -263,8 +263,10 @@ public class NodeManager {
         }
         if (meshId != NULL_GEOMETRY_ID && meshId != EMPTY_GEOMETRY_ID) {
             return this.geometryManager.uploadReplaceSection(meshId, section);
-        }
-        return this.geometryManager.uploadSection(section);
+ }
+   
+Logger.info("Uploading section");
+     return this.geometryManager.uploadSection(section);
     }
 
     private int updateNodeGeometry(int node, BuiltSection geometry) {
