@@ -24,10 +24,10 @@ struct UnpackedNode {
     uint childPtr;
 };
 
-#define NULL_NODE ((1<<24)-1)
-#define EMPTY_QUEUE_ID ((1<<24)-2)
-#define NULL_MESH ((1<<24)-1)
-#define EMPTY_MESH ((1<<24)-2)
+#define NULL_NODE ((1u << 24u) - 1u)
+#define EMPTY_QUEUE_ID ((1u << 24u) - 2u)
+#define NULL_MESH ((1u << 24u) - 1u)
+#define EMPTY_MESH ((1u << 24u) - 2u)
 
 uvec4 unpackNode(out UnpackedNode node, uint nodeId) {
     uvec4 compactedNode = nodes[nodeId];
@@ -38,7 +38,8 @@ uvec4 unpackNode(out UnpackedNode node, uint nodeId) {
 
     node.meshPtr = compactedNode.z&0xFFFFFFu;
     node.childPtr = compactedNode.w&0xFFFFFFu;
-    node.flags = ((compactedNode.z>>24)&0xFFu) | (((compactedNode.w>>24)&0xFFu)<<8);
+    node.flags = ((compactedNode.z >> 24u) & 0xFFu) |
+             (((compactedNode.w >> 24u) & 0xFFu) << 8u);
     return compactedNode;
 }
 
@@ -75,7 +76,7 @@ uint getId(in UnpackedNode node) {
 }
 
 uint getChildCount(in UnpackedNode node) {
-    return ((node.flags >> 2)&7U)+1;
+    return ((node.flags >> 2u) & 7u) + 1u;
 }
 
 uint getChildPtr(in UnpackedNode node) {
@@ -88,16 +89,15 @@ uvec2 getRawPos(in UnpackedNode node) {
 
 /*
 uint getTransformIndex(in UnpackedNode node) {
-    return (node.flags >> 5)&31u;
+    return (node.flags >> 5u) & 31u;
 }*/
 
 //-----------------------------------
 
 void markRequested(inout UnpackedNode node) {
     node.flags |= 1u;
-    nodes[node.nodeId].z |= 1u<<24;
+    nodes[node.nodeId].z |= 1u << 24u;
 }
 
 void debugDumpNode(in UnpackedNode node) {
-    printf("Node %d, %d@[%d,%d,%d], flags: %d, mesh: %d, ChildPtr: %d", node.nodeId, node.lodLevel, node.pos.x, node.pos.y, node.pos.z, node.flags, node.meshPtr, node.childPtr);
 }
