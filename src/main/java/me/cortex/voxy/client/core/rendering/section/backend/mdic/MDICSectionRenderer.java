@@ -256,9 +256,14 @@ public class MDICSectionRenderer extends AbstractSectionRenderer<MDICViewport, B
     }
 
     @Override
-    public void buildDrawCalls(MDICViewport viewport) {
-        if (this.geometryManager.getSectionCount() == 0) return;
-        this.uploadUniformBuffer(viewport);
+public void buildDrawCalls(MDICViewport viewport) {
+
+    Logger.info("Geometry count = " + this.geometryManager.getSectionCount());
+
+    if (this.geometryManager.getSectionCount() == 0)
+        return;
+
+    this.uploadUniformBuffer(viewport);
         //Can do a sneeky trick, since the sectionRenderList is a list to things to render, it invokes the culler
         // which only marks visible sections
 
