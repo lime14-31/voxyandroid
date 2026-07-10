@@ -93,7 +93,7 @@ void bubbleSortInital(uint vis, uint id) {
 
 bool shouldSortId(uint id) {
     UnpackedNode node;
-    if (unpackNode(node, id)==uvec4(-1)) {
+    if (unpackNode(node, id) == uvec4(0xFFFFFFFFu)) {
         return false;//Unallocated node
     }
     if (isEmptyMesh(node) || (!hasMesh(node))) {//|| (!hasChildren(node))
