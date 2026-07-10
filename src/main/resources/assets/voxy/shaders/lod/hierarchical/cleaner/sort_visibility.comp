@@ -23,7 +23,7 @@ uint atomicDerefMaxExchangeGlobal(uint atId, uint id) {
     while (true) {
         const uint existingId = minVisIds[atId];//TODO: check that this does what we want, and that it obtains the value of atValue, at this point
         if (existingId == id) {//If we are trying to insert self, return -1
-            return uint(-1);
+            return 0xFFFFFFFFu;
         }
         //Check if the value is less than the dereferenced value, if its not, return our own id
         if (visibility[existingId&((1u<<31)-1)] <= value) {//Remove the flag bit
