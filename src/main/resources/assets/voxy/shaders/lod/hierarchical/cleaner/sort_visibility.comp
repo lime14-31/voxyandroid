@@ -66,7 +66,7 @@ uint atomicDerefMaxExchangeLocal(uint atId, uint id) {
             return 0xFFFFFFFFu;
         }
         //Check if the value is less than the dereferenced value, if its not, return our own id
-        if (visibility[existingId&((1u<<31u)-1)] <= value) {//Remove the flag bit
+        if (visibility[existingId & ((1u << 31u) - 1u)] <= value) {//Remove the flag bit
             return id;
         }
         //Attempt to swap, since we know we are less than the existingId
@@ -133,7 +133,7 @@ void main() {
     // this means that insertion into the local buffer can be accelerated W.R.T global
     for (uint i = 0u; i < OPS_PER_THREAD; i++) {
         //Copy in with warp size batch fetch
-        uint id = (gl_LocalInvocationID.x*OPS_PER_THREAD) + i;
+        uint id = gl_GlobalInvocationID.x * ELEMS_PER_THREAD + i;
         initalSort[id] = minVisIds[id]|(1u<<31u);//Flag the id as being external
     }
     barrier();
