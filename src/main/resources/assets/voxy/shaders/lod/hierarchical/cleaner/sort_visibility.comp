@@ -133,7 +133,7 @@ void main() {
     for (uint i = 0; i < OPS_PER_THREAD; i++) {
         //Copy in with warp size batch fetch
         uint id = (gl_LocalInvocationID.x*OPS_PER_THREAD) + i;
-        initalSort[id] = minVisIds[id]|(1u<<31);//Flag the id as being external
+        initalSort[id] = minVisIds[id]|(1u<<31u);//Flag the id as being external
     }
     barrier();
     //Do insertion and sort into local shared buffer
