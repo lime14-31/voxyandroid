@@ -26,7 +26,7 @@ uint atomicDerefMaxExchangeGlobal(uint atId, uint id) {
             return 0xFFFFFFFFu;
         }
         //Check if the value is less than the dereferenced value, if its not, return our own id
-        if (visibility[existingId&((1u<<31u)-1)] <= value) {//Remove the flag bit
+        if if (visibility[existingId & ((1u << 31u) - 1u)] <= value) {//Remove the flag bit
             return id;
         }
         //Attempt to swap, since we know we are less than the existingId
@@ -62,7 +62,7 @@ uint atomicDerefMaxExchangeLocal(uint atId, uint id) {
     while (true) {
         const uint existingId = initalSort[atId];//TODO: check that this does what we want, and that it obtains the value of atValue, at this point
         if (existingId == id) {//If we are trying to insert self, return -1
-            return uint(-1);
+            return 0xFFFFFFFFu;
         }
         //Check if the value is less than the dereferenced value, if its not, return our own id
         if (visibility[existingId&((1u<<31u)-1)] <= value) {//Remove the flag bit
@@ -138,12 +138,12 @@ void main() {
     barrier();
     //Do insertion and sort into local shared buffer
     for (uint i = 0u; i < ELEMS_PER_THREAD; i++) {
-        uint id = gl_GlobalInvocationID.x*ELEMS_PER_THREAD+i;
+        uint id = (gl_LocalInvocationID.x * OPS_PER_THREAD) + i;
         uint vis = visibility[id];
         if (vis == 0xFFFFFFFFu) {
         }
         //Quick exit if this element is already bigger than global output
-        if (visibility[minVisIds[OUTPUT_SIZE-1]] <= vis) {
+        if (visibility[minVisIds[OUTPUT_SIZE - 1u]] <= vis) {
             continue;
         }
         if (!shouldSortId(id)) {
@@ -159,7 +159,7 @@ void main() {
     //Work size batching
     for (uint i = 0u; i < OPS_PER_THREAD; i++) {
         barrier();//Probably unneeded, was just to keep warp coheriancy
-        uint id = (gl_LocalInvocationID.x*OPS_PER_THREAD)+i;
+        uint id = gl_GlobalInvocationID.x * ELEMS_PER_THREAD + i;
         uint sid = initalSort[id];
         if ((sid & (1u << 31u)) != 0u) {
             //The flag being external was set, meaning we should NOT insert this element
@@ -171,7 +171,7 @@ void main() {
             continue;
         }
         uint start = id;
-        if (visibility[minVisIds[(id + OUTPUT_SIZE)>>1u]] <= vis) {//Try to skip
+        if (visibility[minVisIds[OUTPUT_SIZE - 1u]] <= vis) {//Try to skip
             start = (id + OUTPUT_SIZE)>>1u;
         }
         bubbleSortGlobal(start, sid);//Insert into global
