@@ -26,7 +26,8 @@ uint atomicDerefMaxExchangeGlobal(uint atId, uint id) {
             return 0xFFFFFFFFu;
         }
         //Check if the value is less than the dereferenced value, if its not, return our own id
-        if (visibility[existingId & ((1u << 31u) - 1u)] <= value) {//Remove the flag bit
+           
+if (visibility[existingId & ((1u << 31u) - 1u)] <= value) {//Remove the flag bit
             return id;
         }
         //Attempt to swap, since we know we are less than the existingId
@@ -167,7 +168,7 @@ void main() {
         }
         uint vis = visibility[sid];
         //If output is already smaller than self
-        if (visibility[minVisIds[OUTPUT_SIZE-1]] <= vis) {
+        if (visibility[minVisIds[OUTPUT_SIZE-1u]] <= vis) {
             continue;
         }
         uint start = id;
