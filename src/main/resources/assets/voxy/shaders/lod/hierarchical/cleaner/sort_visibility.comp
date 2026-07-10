@@ -133,7 +133,7 @@ void main() {
     // this means that insertion into the local buffer can be accelerated W.R.T global
     for (uint i = 0u; i < OPS_PER_THREAD; i++) {
         //Copy in with warp size batch fetch
-        uint id = gl_GlobalInvocationID.x * ELEMS_PER_THREAD + i;
+        uint id = (gl_LocalInvocationID.x * OPS_PER_THREAD) + i;
         initalSort[id] = minVisIds[id]|(1u<<31u);//Flag the id as being external
     }
     barrier();
@@ -160,7 +160,7 @@ void main() {
     //Work size batching
     for (uint i = 0u; i < OPS_PER_THREAD; i++) {
         barrier();//Probably unneeded, was just to keep warp coheriancy
-        uint id = gl_GlobalInvocationID.x * ELEMS_PER_THREAD + i;
+        uint id = (gl_LocalInvocationID.x * OPS_PER_THREAD) + i;
         uint sid = initalSort[id];
         if ((sid & (1u << 31u)) != 0u) {
             //The flag being external was set, meaning we should NOT insert this element
