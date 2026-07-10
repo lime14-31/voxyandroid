@@ -29,5 +29,5 @@ uint diff = dst - src;
 for (uint i = start; i < min(start + workPerThread, siz + src); i++) {
     outputBuffer[i + diff] = dataInBuffer[i];
 }
-    }
+    
 }
