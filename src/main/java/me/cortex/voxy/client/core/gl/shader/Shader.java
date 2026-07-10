@@ -200,9 +200,11 @@ public class Shader extends TrackedObject {
             }
         }
 
-Logger.error("=== CREATE SHADER CALLED ===");
 
         private static int createShader(ShaderType type, String src) {
+
+Logger.error("=== CREATE SHADER CALLED ===");
+
             int shader = GL20C.glCreateShader(type.gl);
 
 Logger.error("Shader ID = " + shader);
