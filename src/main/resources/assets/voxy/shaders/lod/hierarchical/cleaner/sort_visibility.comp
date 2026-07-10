@@ -161,7 +161,7 @@ void main() {
         barrier();//Probably unneeded, was just to keep warp coheriancy
         uint id = (gl_LocalInvocationID.x*OPS_PER_THREAD)+i;
         uint sid = initalSort[id];
-        if ((sid&(1u<<31)) != 0) {
+        if ((sid & (1u << 31u)) != 0u) {
             //The flag being external was set, meaning we should NOT insert this element
             continue;
         }
