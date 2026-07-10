@@ -45,7 +45,7 @@ uint atomicDerefMaxExchangeGlobal(uint atId, uint id) {
 void bubbleSortGlobal(uint start, uint id) {
     for (uint i = start; i < OUTPUT_SIZE; i++) {
         id = atomicDerefMaxExchangeGlobal(i, id);
-        if (id == uint(-1)) {
+        if (id == 0xFFFFFFFFu) {
             break;
         }
     }
