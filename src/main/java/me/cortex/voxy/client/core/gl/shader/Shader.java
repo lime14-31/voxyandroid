@@ -128,6 +128,7 @@ public class Shader extends TrackedObject {
         }
 
         public Builder<T> add(ShaderType type, String id) {
+Logger.error("Loading shader: " + id + " (" + type + ")");
             this.addSource(type, ShaderLoader.parse(id));
             return this;
         }
