@@ -231,6 +231,8 @@ Logger.warn("LOG LENGTH = " + log.length());
 
             Logger.warn("===== SHADER COMPILER LOG =====");
 Logger.warn(log);
+Logger.warn("===============================");
+Logger.warn(log);
 Logger.warn("===== SHADER SOURCE BEGIN =====");
 Logger.warn(src);
 Logger.warn("===== SHADER SOURCE END =====");
