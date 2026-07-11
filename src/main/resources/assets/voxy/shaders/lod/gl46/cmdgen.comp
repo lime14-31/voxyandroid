@@ -63,7 +63,7 @@ void main() {
     uint dat = visibilityData[sectionId];
 
     //if the section was visible this frame
-    bool shouldRender = (dat&0x7fffffffu) == frameId;
+    bool shouldRender = true;
     bool renderTemporally = (dat&0x80000000u)==0;// means, if it was not visible last frame
 
 
