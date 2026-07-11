@@ -142,6 +142,7 @@ void main() {
         uint id = gl_GlobalInvocationID.x * ELEMS_PER_THREAD + i;
         uint vis = visibility[id];
         if (vis == 0xFFFFFFFFu) {
+            continue;
         }
         //Quick exit if this element is already bigger than global output
         if (visibility[minVisIds[uint(OUTPUT_SIZE) - 1u]] <= vis) {
