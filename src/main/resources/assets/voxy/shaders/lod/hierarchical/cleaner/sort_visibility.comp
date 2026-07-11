@@ -175,7 +175,6 @@ void main() {
         uint start = id;
 if (visibility[minVisIds[(id + uint(OUTPUT_SIZE)) >> 1u]] <= vis) { // Try to skip
     start = (id + uint(OUTPUT_SIZE)) >> 1u;
-}
 bubbleSortGlobal(start, sid); // Insert into global
     }
 }
