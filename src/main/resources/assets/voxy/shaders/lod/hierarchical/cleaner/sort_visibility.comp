@@ -31,7 +31,7 @@ if (visibility[existingId & ((1u << 31u) - 1u)] <= value) {//Remove the flag bit
             return id;
         }
         //Attempt to swap, since we know we are less than the existingId
-        const uint c = atomicCompSwap(minVisIds[atId], existingId, id);
+         uint c = atomicCompSwap(minVisIds[atId], existingId, id);
         //Check if we did swap, else if we failed (or got reswapped else where) recheck
 
         //We did swap, (since the original mem contents was the existing id)
@@ -70,7 +70,7 @@ uint atomicDerefMaxExchangeLocal(uint atId, uint id) {
             return id;
         }
         //Attempt to swap, since we know we are less than the existingId
-        const uint c = atomicCompSwap(initalSort[atId], existingId, id);
+        uint c = atomicCompSwap(initalSort[atId], existingId, id);
         //Check if we did swap, else if we failed (or got reswapped else where) recheck
 
         //We did swap, (since the original mem contents was the existing id)
