@@ -19,7 +19,7 @@ layout(binding = OUTPUT_BUFFER_BINDING, std430) restrict volatile buffer Minimum
 
 //Returns the id of the max value
 uint atomicDerefMaxExchangeGlobal(uint atId, uint id) {
-    const uint value = visibility[id];
+    uint value = visibility[id];
     while (true) {
         const uint existingId = minVisIds[atId];//TODO: check that this does what we want, and that it obtains the value of atValue, at this point
         if (existingId == id) {//If we are trying to insert self, return -1
@@ -59,7 +59,7 @@ shared uint initalSort[OUTPUT_SIZE];
 
 //Returns the id of the max value
 uint atomicDerefMaxExchangeLocal(uint atId, uint id) {
-    const uint value = visibility[id];
+    uint value = visibility[id];
     while (true) {
         const uint existingId = initalSort[atId];//TODO: check that this does what we want, and that it obtains the value of atValue, at this point
         if (existingId == id) {//If we are trying to insert self, return -1
