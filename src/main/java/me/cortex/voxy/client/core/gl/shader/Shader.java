@@ -206,6 +206,8 @@ Logger.error("Loading shader: " + id + " (" + type + ")");
 
 Logger.error("=== CREATE SHADER CALLED ===");
 
+Logger.error("Shader type = " + type);
+
             int shader = GL20C.glCreateShader(type.gl);
 
 Logger.error("Shader ID = " + shader);
