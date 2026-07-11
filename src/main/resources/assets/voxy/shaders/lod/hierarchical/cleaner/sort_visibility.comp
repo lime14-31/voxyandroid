@@ -144,7 +144,7 @@ void main() {
         if (vis == 0xFFFFFFFFu) {
         }
         //Quick exit if this element is already bigger than global output
-        if (visibility[minVisIds[OUTPUT_SIZE - 1u]] <= vis) {
+        if (visibility[minVisIds[uint(OUTPUT_SIZE) - 1u]] <= vis) {
             continue;
         }
         if (!shouldSortId(id)) {
@@ -168,7 +168,7 @@ void main() {
         }
         uint vis = visibility[sid];
         //If output is already smaller than self
-        if (visibility[minVisIds[OUTPUT_SIZE-1u]] <= vis) {
+        if (visibility[minVisIds[uint(OUTPUT_SIZE) - 1u]] <= vis) {
             continue;
         }
         uint start = id;
