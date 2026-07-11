@@ -84,7 +84,7 @@ void bubbleSortInital(uint vis, uint id) {
     uint start = 0u;
     //Fast path cut out half the ops
     if (visibility[initalSort[(uint(OUTPUT_SIZE) - 1u) >> 1u]] <= vis) {//Check if we are more than half way
-        start = (OUTPUT_SIZE-1u)>>1u;
+        start = (uint(OUTPUT_SIZE) - 1u) >> 1u;
     }
 
     for (uint i = start; i < uint(OUTPUT_SIZE); i++) {
