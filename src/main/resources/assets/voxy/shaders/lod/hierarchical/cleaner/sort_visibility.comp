@@ -61,7 +61,7 @@ shared uint initalSort[OUTPUT_SIZE];
 uint atomicDerefMaxExchangeLocal(uint atId, uint id) {
     uint value = visibility[id];
     while (true) {
-        const uint existingId = initalSort[atId];//TODO: check that this does what we want, and that it obtains the value of atValue, at this point
+        uint existingId = initalSort[atId];//TODO: check that this does what we want, and that it obtains the value of atValue, at this point
         if (existingId == id) {//If we are trying to insert self, return -1
             return 0xFFFFFFFFu;
         }
