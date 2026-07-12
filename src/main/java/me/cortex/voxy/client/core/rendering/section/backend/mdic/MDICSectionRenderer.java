@@ -302,8 +302,7 @@ Logger.info("Reached culling");
             glColorMask(false, false, false, false);
             glDepthMask(false);
             glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT|GL_COMMAND_BARRIER_BIT);
-            Logger.info("About to call
- glDrawElementsIndirect");Logger.info("RenderList size = " + viewport.getRenderList().size());
+            Logger.info("About to call glDrawElementsIndirect");
 Logger.info("Geometry count = " + this.geometryManager.getSectionCount());
 
 glDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_BYTE, 6 * 4);
