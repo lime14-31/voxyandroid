@@ -319,6 +319,8 @@ Logger.info("Indirect draw returned");
             this.distanceCountBuffer.zeroRange(0, 1024*4);
 
 Logger.info("Reached command generation");
+
+Logger.info("FrameId = " + viewport.frameId);
             this.commandGenShader.bind();
             glBindBufferBase(GL_UNIFORM_BUFFER, 0, this.uniform.id);
             glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, viewport.drawCallBuffer.id);
