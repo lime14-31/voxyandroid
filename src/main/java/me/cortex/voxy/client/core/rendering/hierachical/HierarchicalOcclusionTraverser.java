@@ -215,7 +215,8 @@ public class HierarchicalOcclusionTraverser {
         MemoryUtil.memPutInt(ptr, (int) (viewport.getRenderList().size()/4-1)); ptr += 4;
 
         //VisibilityId
-        MemoryUtil.memPutInt(ptr, this.nodeCleaner.visibilityId); ptr += 4;
+        MemoryUtil.memPutInt(ptr, this.nodeCleaner.visibilityId);
+Logger.info("VisibilityId = " + this.nodeCleaner.visibilityId); ptr += 4;
 
         {
             final double TARGET_COUNT = 4000;//TODO: make this configurable, or at least dynamically computed based on throughput rate of mesh gen
