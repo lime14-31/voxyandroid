@@ -2,10 +2,11 @@
 //Uses intrinsics and other operations to perform very fast sorting
 // we dont need a propper sort, only a fuzzy sort, as in we only need to top 128 entries, but those can be unsorted
 
-//#define OUTPUT_SIZE 128
+const uint OUTPUT_SIZE = 256u;
 
-layout(local_size_x=WORK_SIZE, local_size_y=1) in;
-#define OPS_PER_THREAD (OUTPUT_SIZE/WORK_SIZE)
+layout(local_size_x = WORK_SIZE, local_size_y = 1) in;
+
+const uint OPS_PER_THREAD = OUTPUT_SIZE / uint(WORK_SIZE);
 
 #import <voxy:lod/hierarchical/node.glsl>
 
